@@ -1,22 +1,23 @@
 .song {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-  gap: 24px;
-  align-items: center;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.song-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: var(--black);
   border: 1px solid var(--white-100);
   padding: 16px;
-  margin-top: 16px;
+  margin: 16px;
   border-radius: 4px;
 }
 
 /* for tablet min-width : 576px */
 @media all and (min-width: 576px) {
   .song {
-    margin-top: 32px;
-    grid-template-columns: minmax(200px, 40%) 1fr;
-    grid-template-rows: auto;
-    gap: 32px;
+    gap: 12px;
   }
 }

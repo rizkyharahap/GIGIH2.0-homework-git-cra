@@ -40,6 +40,11 @@ textarea:focus {
   outline: 2px solid var(--white-300);
 }
 
+a {
+  display: inline-block;
+  text-decoration: none;
+}
+
 label {
   display: block;
   margin-bottom: 16px;
