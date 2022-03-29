@@ -5,16 +5,16 @@ import "./index.css";
  * For Song Description component
  * @param {string} url URL of Song
  */
-const Action = ({ url }) => {
+const Action = ({ url, children, ...props }) => {
   return (
     <a
       href={url}
-      target="_blank"
-      className="btn btn-song"
+      className="btn btn-action"
       title="Button"
       rel="noreferrer"
+      {...props}
     >
-      Play on
+      {children}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="800"

@@ -1,0 +1,43 @@
+.btn-auth {
+  display: flex;
+  align-items: center;
+  width: auto;
+  min-width: 120px;
+  height: 36px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 33ms cubic-bezier(0.3, 0, 0, 1);
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.btn-auth-login {
+  justify-content: center;
+  background-color: var(--white);
+  color: var(--black);
+}
+
+.btn-auth-login:hover {
+  transform: scale(1.06);
+}
+
+.btn-auth-logout {
+  justify-content: space-between;
+  column-gap: 8px;
+  padding: 2px 16px 2px 2px;
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.btn-auth-logout:hover {
+  background-color: #282828;
+}
+
+/* for tablet min-width : 576px */
+@media all and (min-width: 576px) {
+  .btn-auth {
+    font-size: 1rem;
+    height: 38px;
+  }
+}

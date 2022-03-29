@@ -1,4 +1,4 @@
-.btn-song {
+.btn-action {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,12 +9,12 @@
   background-color: var(--primary);
 }
 
-.btn-song:hover {
+.btn-action:hover {
   color: white;
   background-color: var(--secondary);
 }
 
-.btn-song svg {
+.btn-action svg {
   width: 44px;
   height: 44px;
   margin-left: 8px;

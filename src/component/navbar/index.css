@@ -1,0 +1,23 @@
+.navbar-wrapper {
+  background: black;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.navbar {
+  height: 64px;
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  grid-template-rows: 1fr;
+  column-gap: 16px;
+  align-items: center;
+}
+
+/* for tablet min-width : 576px */
+@media all and (min-width: 576px) {
+  .navbar {
+    padding: 0 16px;
+  }
+}
