@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Item from "./item";
 import "./index.css";
+import Action from "./action";
 
 const SongRequestInfo = ({ title, description }) => (
   <div className="song-info">
@@ -11,6 +12,27 @@ const SongRequestInfo = ({ title, description }) => (
 
 // Song Wrapper component
 const Song = ({ tracks, error, isLoading }) => {
+  const [selectedSong, setSelectedSong] = useState([]);
+
+  // Handle for select or deselect song
+  const handleSelectedSong = (value) => {
+    // Check for selected song
+    const indexSelectedSong = selectedSong.indexOf(value);
+
+    const newSelectedSong = [...selectedSong];
+
+    // When song not selected
+    if (indexSelectedSong < 0) {
+      // append to new selected song
+      newSelectedSong.push(value);
+    } else {
+      // remove from selected song with index of selected song
+      newSelectedSong.splice(indexSelectedSong, 1);
+    }
+
+    setSelectedSong(newSelectedSong);
+  };
+
   if (isLoading)
     return (
       <div className="song-info">
@@ -37,9 +59,20 @@ const Song = ({ tracks, error, isLoading }) => {
     <div className="song">
       {/* Mapping all tracks */}
 
-      {tracks.map(({ id, album, artists, ...track }) => (
-        <Item key={id} album={album} artist={artists[0]} track={track} />
-      ))}
+      {tracks.map(({ uri, album, artists, ...track }) => {
+        const isSelected = selectedSong.includes(uri);
+
+        return (
+          <Item key={uri} album={album} artist={artists[0]} track={track}>
+            <Action
+              onClick={() => handleSelectedSong(uri)}
+              data-type={isSelected ? "selected" : "unselected"}
+            >
+              {isSelected ? "Deselect Song" : "Select Song"}
+            </Action>
+          </Item>
+        );
+      })}
     </div>
   );
 };

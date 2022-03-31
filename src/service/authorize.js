@@ -7,8 +7,8 @@ export const spotifyAuthorizeURL = () => {
 
   const params = {
     response_type: "token",
-    client_id: encodeURIComponent(clientId),
-    scope: encodeURIComponent(scope),
+    client_id: clientId,
+    scope,
     redirect_uri: redirectURI,
   };
 

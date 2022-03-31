@@ -1,37 +1,29 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "./index.css";
 
-class SearchBar extends Component {
-  constructor(props) {
-    super(props);
+const SearchBar = ({ onSearch, placeholder }) => {
+  const [search, setSearch] = useState("");
 
-    this.state = {
-      search: "",
-    };
-  }
-
-  handleInputChange = (event) => {
-    this.setState({
-      search: event.target.value,
-    });
+  const handleInputChange = (event) => {
+    setSearch(event.target.value);
   };
 
-  handleSumbit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    this.props.onSearch(this.state.search);
+    onSearch(search);
   };
 
-  render() {
-    return (
+  return (
+    <form onSubmit={handleSubmit}>
       <div className="search">
         <input
           className="search-input"
           type="search"
-          placeholder={this.props.placeholder}
-          defaultValue={this.state.search}
-          onChange={this.handleInputChange}
+          placeholder={placeholder}
+          defaultValue={search}
+          onChange={handleInputChange}
         />
-        <button className="btn btn-search" onClick={this.handleSumbit}>
+        <button className="btn btn-search" type="submit">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"
@@ -44,8 +36,8 @@ class SearchBar extends Component {
           </svg>
         </button>
       </div>
-    );
-  }
-}
+    </form>
+  );
+};
 
 export default SearchBar;

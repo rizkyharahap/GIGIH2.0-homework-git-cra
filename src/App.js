@@ -1,23 +1,25 @@
-import { Component } from "react";
+import { useState } from "react";
 import Container from "./component/container";
 import Navbar from "./component/navbar";
 import Song from "./component/song";
 import { searchTracksAPI } from "./service/api";
 import { spotifyAuthorizeURL } from "./service/authorize";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tracks: [],
-      isLoading: false,
-      error: null,
-    };
-  }
+const App = () => {
+  // Check if has access token
+  const params = new URLSearchParams(window.location.hash.replace("#", "?"));
+  const accessToken = params.get("access_token");
 
-  handleSearch = async (query) => {
+  // Set access token to localStorage
+  if (accessToken) localStorage.setItem("spotify-token", accessToken);
+
+  const [tracks, setTracks] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleSearch = async (query) => {
     // Show Loading
-    this.setState({ isLoading: true });
+    setIsLoading(true);
 
     try {
       const tracksResponse = await searchTracksAPI({ query });
@@ -27,7 +29,8 @@ class App extends Component {
 
       // Assign to state tracks
       // console.log("Tracks : ", tracksResponse);
-      this.setState({ tracks: tracksResponse.tracks.items, error: null });
+      setTracks(tracksResponse.tracks?.items || []);
+      setError(null);
     } catch (error) {
       console.error("Error get tracks : ", error);
 
@@ -54,34 +57,22 @@ class App extends Component {
           break;
       }
 
-      this.setState({ error: errorData });
+      setError(errorData);
     } finally {
       // Hide loading
-      this.setState({ isLoading: false });
+      setIsLoading(false);
     }
   };
 
-  render() {
-    // Check if has access token
-    const params = new URLSearchParams(window.location.hash.replace("#", "?"));
-    const accessToken = params.get("access_token");
+  return (
+    <>
+      <Navbar authorizeUrl={spotifyAuthorizeURL()} onSearch={handleSearch} />
 
-    // Set access token to localStorage
-    if (accessToken) localStorage.setItem("spotify-token", accessToken);
-
-    return (
-      <>
-        <Navbar
-          authorizeUrl={spotifyAuthorizeURL()}
-          onSearch={this.handleSearch}
-        />
-
-        <Container>
-          <Song {...this.state} />
-        </Container>
-      </>
-    );
-  }
-}
+      <Container>
+        <Song tracks={tracks} error={error} isLoading={isLoading} />
+      </Container>
+    </>
+  );
+};
 
 export default App;

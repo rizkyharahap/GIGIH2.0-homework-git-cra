@@ -7,10 +7,10 @@ export const searchTracksAPI = async ({
   const url = new URL("https://api.spotify.com/v1/search");
 
   const params = {
-    q: encodeURIComponent(query),
-    type: encodeURIComponent(type),
-    limit: encodeURIComponent(limit),
-    offset: encodeURIComponent(offset),
+    q: query,
+    type,
+    limit,
+    offset,
   };
 
   url.search = new URLSearchParams(params).toString();
