@@ -3,10 +3,13 @@
   --secondary: #1ed760;
   --black: #181818;
   --black-500: rgba(0, 0, 0, 0.5);
+  --black-700: rgba(0, 0, 0, 0.7);
   --white: #ffffff;
   --white-100: rgba(255, 255, 255, 0.1);
   --white-300: rgba(255, 255, 255, 0.3);
   --white-700: rgba(255, 255, 255, 0.7);
+  --grey: #282828;
+  --grey-100: #535353;
 }
 
 * {
@@ -36,7 +39,7 @@ textarea {
 
 input:focus,
 textarea:focus {
-  outline: 2px solid var(--white-300);
+  outline: 1px solid var(--white-300);
 }
 
 a {
@@ -46,7 +49,7 @@ a {
 
 label {
   display: block;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 h1,
@@ -71,7 +74,7 @@ main {
 }
 
 .btn {
-  font-size: 1.4rem;
+  font-size: 1.15rem;
   font-weight: 600;
   border-radius: 9999px;
   text-align: center;
@@ -86,6 +89,24 @@ main {
 
 .btn:active {
   animation: press 0.1s linear;
+}
+
+.form-control {
+  margin-bottom: 16px;
+}
+
+.text-field {
+  padding: 8px 12px;
+  background-color: var(--white-100);
+  border-radius: 4px;
+  color: var(--white-700);
+  width: 100%;
+  text-overflow: ellipsis;
+  transition: background-color 30ms ease-out;
+}
+
+.text-field:focus {
+  background-color: var(--grey);
 }
 
 /* Animation */

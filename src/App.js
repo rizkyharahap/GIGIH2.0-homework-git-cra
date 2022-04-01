@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Container from "./component/container";
 import Navbar from "./component/navbar";
+import Playlist from "./component/playlist";
 import Song from "./component/song";
-import { searchTracksAPI } from "./service/api";
+import { getCurrentUserProfileAPI, searchTracksAPI } from "./service/api";
+import { apiErrorHandler } from "./service/api-error-handler";
 import { spotifyAuthorizeURL } from "./service/authorize";
 
 const App = () => {
@@ -13,63 +15,131 @@ const App = () => {
   // Set access token to localStorage
   if (accessToken) localStorage.setItem("spotify-token", accessToken);
 
-  const [tracks, setTracks] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [tracks, setTracks] = useState({
+    data: [],
+    isLoading: false,
+    error: null,
+  });
 
-  const handleSearch = async (query) => {
+  const [user, setUser] = useState({
+    data: {},
+    isLoading: false,
+    error: null,
+  });
+
+  const [selectedSong, setSelectedSong] = useState([]);
+
+  // Handle for select or deselect song
+  const handleSelectedSong = (value) => {
+    // Check for selected song
+    const indexSelectedSong = selectedSong.indexOf(value);
+
+    const newSelectedSong = [...selectedSong];
+
+    // When song not selected
+    if (indexSelectedSong < 0) {
+      // append to new selected song
+      newSelectedSong.push(value);
+    } else {
+      // remove from selected song with index of selected song
+      newSelectedSong.splice(indexSelectedSong, 1);
+    }
+
+    setSelectedSong(newSelectedSong);
+  };
+
+  const getSearchTracks = async (query) => {
     // Show Loading
-    setIsLoading(true);
+    setTracks((prev) => ({
+      ...prev,
+      isLoading: true,
+    }));
 
     try {
-      const tracksResponse = await searchTracksAPI({ query });
+      const tracksResponse = await searchTracksAPI({
+        token: accessToken,
+        query,
+      });
 
       // Throw error if have error
       if (tracksResponse.error) throw tracksResponse.error;
 
       // Assign to state tracks
-      // console.log("Tracks : ", tracksResponse);
-      setTracks(tracksResponse.tracks?.items || []);
-      setError(null);
+      setTracks((prev) => ({
+        ...prev,
+        data: tracksResponse.tracks?.items || [],
+        error: null,
+      }));
     } catch (error) {
       console.error("Error get tracks : ", error);
 
-      const errorData = {
-        description: error.message,
-      };
-
-      // Check spesifict error
-      switch (error.status) {
-        case 400:
-          errorData.message = "Enter search keyword";
-          break;
-        case 401:
-          errorData.message = "Unauthorized";
-          break;
-        case 403:
-          errorData.message = "Forbidden";
-          break;
-        case 429:
-          errorData.message = "The app has exceeded its rate limits";
-          break;
-        default:
-          errorData.message = "Oops something wrong !";
-          break;
-      }
-
-      setError(errorData);
+      setTracks((prev) => ({
+        ...prev,
+        error: apiErrorHandler(error),
+      }));
     } finally {
       // Hide loading
-      setIsLoading(false);
+      setTracks((prev) => ({
+        ...prev,
+        isLoading: false,
+      }));
     }
   };
 
+  const getCurrentUserProfile = async (token) => {
+    // Show Loading
+    setUser((prev) => ({
+      ...prev,
+      isLoading: true,
+    }));
+
+    try {
+      const userResponse = await getCurrentUserProfileAPI({
+        token,
+      });
+
+      // Throw error if have error
+      if (userResponse.error) throw userResponse.error;
+      if (!userResponse.id) throw userResponse.error;
+
+      // Assign to state users
+      setUser((prev) => ({
+        ...prev,
+        data: userResponse,
+        error: null,
+      }));
+    } catch (error) {
+      console.error("Error get users : ", error);
+
+      setUser((prev) => ({
+        ...prev,
+        error: apiErrorHandler(error),
+      }));
+    } finally {
+      // Hide loading
+      setUser((prev) => ({
+        ...prev,
+        isLoading: false,
+      }));
+    }
+  };
+
+  useEffect(() => {
+    // Load user when access token is available
+    if (accessToken) getCurrentUserProfile(accessToken);
+  }, [accessToken]);
+
   return (
     <>
-      <Navbar authorizeUrl={spotifyAuthorizeURL()} onSearch={handleSearch} />
+      <Navbar authorizeUrl={spotifyAuthorizeURL()} onSearch={getSearchTracks} />
 
       <Container>
-        <Song tracks={tracks} error={error} isLoading={isLoading} />
+        <Playlist user_id={user.data.id} selectedSong={selectedSong} />
+        <Song
+          {...tracks}
+          selectedSong={selectedSong}
+          onSongSelected={handleSelectedSong}
+        />
       </Container>
     </>
   );

@@ -1,0 +1,35 @@
+.playlist {
+  margin-top: 24px;
+}
+
+.btn-playlist-create {
+  display: flex;
+  align-items: center;
+  width: auto;
+  height: 40px;
+  padding: 8px 24px;
+  background-color: transparent;
+  color: var(--white-700);
+}
+
+.btn-playlist-create:hover {
+  color: var(--white);
+}
+
+.btn-playlist-create-icon {
+  display: flex;
+  margin-right: 8px;
+  background-color: var(--white-700);
+  color: var(--black);
+  border-radius: 2px;
+}
+
+.btn-playlist-create:hover .btn-playlist-create-icon {
+  background-color: var(--white);
+}
+
+.btn-playlist-create span {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1rem;
+}

@@ -1,49 +1,47 @@
 .song {
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   padding: 24px 0;
 }
 
-.song-info {
-  margin-top: 200px;
-  text-align: center;
+.btn-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 8px 12px;
 }
 
-.song-info h3 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+/* data atribute for type of unselected button */
+[data-type="unselected"] {
+  background-color: var(--primary);
+  color: var(--white);
 }
 
-.song-info p {
-  font-size: 1rem;
+[data-type="unselected"]:hover {
+  background-color: var(--secondary);
 }
 
-.loading {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  border-top-color: #fff;
-  animation: spin 1s ease-in-out infinite;
-  -webkit-animation: spin 1s ease-in-out infinite;
+/* data atribute for type of selected button */
+[data-type="selected"] {
+  background-color: var(white-700);
+  color: var(--black);
 }
 
-@keyframes spin {
-  to {
-    -webkit-transform: rotate(360deg);
-  }
+[data-type="selected"]:hover {
+  background-color: var(white-300);
 }
-@-webkit-keyframes spin {
-  to {
-    -webkit-transform: rotate(360deg);
-  }
+
+.btn-action svg {
+  width: 44px;
+  height: 44px;
+  margin-left: 8px;
 }
 
 /* for tablet min-width : 576px */
 @media all and (min-width: 576px) {
   .song {
-    gap: 12px;
+    gap: 1.3rem;
   }
 }

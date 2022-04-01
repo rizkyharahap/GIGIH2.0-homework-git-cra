@@ -31,7 +31,7 @@
 }
 
 .btn-auth-logout:hover {
-  background-color: #282828;
+  background-color: var(--grey);
 }
 
 /* for tablet min-width : 576px */
