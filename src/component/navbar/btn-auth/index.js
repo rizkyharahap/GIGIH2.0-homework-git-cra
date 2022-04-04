@@ -1,18 +1,21 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { clearAccessToken } from "../../../redux/slices/globalSlice";
 import Avatar from "../../avatar";
 import "./index.css";
 
 const ButtonAuth = ({ authorizeUrl }) => {
-  // Check has token in localStorage
-  const isLogin = localStorage.getItem("spotify-token");
+  const dispatch = useDispatch();
 
-  // Remove localstorage on logout
+  const accessToken = useSelector((state) => state.global.accessToken);
+
+  // Clear access token on logout
   const handleLogout = () => {
-    localStorage.removeItem("spotify-token");
+    dispatch(clearAccessToken());
     window.location.replace(process.env.REACT_APP_BASE_URL);
   };
 
-  if (isLogin)
+  if (accessToken)
     return (
       <button className="btn btn-auth btn-auth-logout" onClick={handleLogout}>
         <Avatar />

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { addPlaylistItemsAPI, createPlaylistAPI } from "../../service/api";
 import { apiErrorHandler } from "../../service/api-error-handler";
 import Message from "../message";
@@ -8,6 +9,8 @@ import FormPlaylist from "./form";
 import "./index.css";
 
 const Playlist = ({ user_id, selectedSong = [] }) => {
+  const accessToken = useSelector((state) => state.global.accessToken);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [playlist, setPlaylist] = useState({
     data: {},
@@ -28,10 +31,8 @@ const Playlist = ({ user_id, selectedSong = [] }) => {
     }));
 
     try {
-      const token = localStorage.getItem("spotify-token");
-
       const createPlaylist = await createPlaylistAPI({
-        token,
+        token: accessToken,
         user_id,
         data,
       });
@@ -47,7 +48,7 @@ const Playlist = ({ user_id, selectedSong = [] }) => {
 
       // Add selected song to playlist
       const addItemPLaylist = await addPlaylistItemsAPI({
-        token,
+        token: accessToken,
         playlist_id: playlistId,
         uris: selectedSong,
       });
@@ -62,6 +63,8 @@ const Playlist = ({ user_id, selectedSong = [] }) => {
         data: createPlaylist,
         error: null,
       }));
+
+      setIsModalOpen(false);
     } catch (error) {
       console.error("Error get users : ", error);
 

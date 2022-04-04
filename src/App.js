@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Container from "./component/container";
 import Navbar from "./component/navbar";
 import Playlist from "./component/playlist";
 import Song from "./component/song";
+import { setAccessToken } from "./redux/slices/globalSlice";
 import { getCurrentUserProfileAPI, searchTracksAPI } from "./service/api";
 import { apiErrorHandler } from "./service/api-error-handler";
 import { spotifyAuthorizeURL } from "./service/authorize";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  const accessToken = useSelector((state) => state.global.accessToken);
   // Check if has access token
   const params = new URLSearchParams(window.location.hash.replace("#", "?"));
-  const accessToken = params.get("access_token");
-
-  // Set access token to localStorage
-  if (accessToken) localStorage.setItem("spotify-token", accessToken);
+  const token = params.get("access_token");
 
   const [tracks, setTracks] = useState({
     data: [],
@@ -123,6 +125,11 @@ const App = () => {
       }));
     }
   };
+
+  // Set access token to redux
+  useEffect(() => {
+    if (token) dispatch(setAccessToken(token));
+  }, [dispatch, token]);
 
   useEffect(() => {
     // Load user when access token is available
