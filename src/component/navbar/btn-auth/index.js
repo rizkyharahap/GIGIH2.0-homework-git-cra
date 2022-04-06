@@ -12,7 +12,6 @@ const ButtonAuth = ({ authorizeUrl }) => {
   // Clear access token on logout
   const handleLogout = () => {
     dispatch(clearAccessToken());
-    window.location.replace(process.env.REACT_APP_BASE_URL);
   };
 
   if (accessToken)
