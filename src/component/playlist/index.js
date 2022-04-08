@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { addPlaylistItemsAPI, createPlaylistAPI } from "../../service/api";
-import { apiErrorHandler } from "../../service/api-error-handler";
-import Message from "../message";
-import Modal from "../modal";
-import Spinner from "../spinner";
-import FormPlaylist from "./form";
-import "./index.css";
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { addPlaylistItemsAPI, createPlaylistAPI } from '../../service/api';
+import { apiErrorHandler } from '../../service/api-error-handler';
+import Message from '../message';
+import Modal from '../modal';
+import Spinner from '../spinner';
+import FormPlaylist from './form';
+import './index.css';
 
 const Playlist = ({ user_id, selectedSong = [] }) => {
   const accessToken = useSelector((state) => state.global.accessToken);
@@ -42,9 +42,9 @@ const Playlist = ({ user_id, selectedSong = [] }) => {
 
       const playlistId = createPlaylist?.id;
 
-      if (!playlistId) throw new Error("Create playlist failed");
+      if (!playlistId) throw new Error('Create playlist failed');
 
-      console.log("Create Playlist Success: ", createPlaylist);
+      console.log('Create Playlist Success: ', createPlaylist);
 
       // Add selected song to playlist
       const addItemPLaylist = await addPlaylistItemsAPI({
@@ -55,7 +55,7 @@ const Playlist = ({ user_id, selectedSong = [] }) => {
 
       if (addItemPLaylist.error) throw addItemPLaylist.error;
 
-      console.log("Add item to playlist : ", addItemPLaylist);
+      console.log('Add item to playlist : ', addItemPLaylist);
 
       // Assign to state users
       setPlaylist((prev) => ({
@@ -66,7 +66,7 @@ const Playlist = ({ user_id, selectedSong = [] }) => {
 
       setIsModalOpen(false);
     } catch (error) {
-      console.error("Error get users : ", error);
+      console.error('Error get users : ', error);
 
       setPlaylist((prev) => ({
         ...prev,
@@ -106,10 +106,7 @@ const Playlist = ({ user_id, selectedSong = [] }) => {
         <Modal.Header title="Create Playlist" onClose={handleToogleModal} />
         <Modal.Content>
           {!Array.isArray(selectedSong) || selectedSong.length === 0 ? (
-            <Message
-              title="Not song selected"
-              description="Please select at least one song !"
-            />
+            <Message title="Not song selected" description="Please select at least one song !" />
           ) : (
             <FormPlaylist onSubmit={createPlaylist} />
           )}

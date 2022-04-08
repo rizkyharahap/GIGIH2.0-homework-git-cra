@@ -1,28 +1,28 @@
-import PageNotFound from "../pages/404";
-import AuthCallback from "../pages/callback";
-import Home from "../pages/home";
-import Login from "../pages/login";
+import PageNotFound from '../pages/404';
+import AuthCallback from '../pages/callback';
+import Home from '../pages/home';
+import Login from '../pages/login';
 
 const routes = [
   {
-    path: "/",
+    path: '/',
     exact: true,
     component: Login,
-    type: "public",
+    type: 'public',
   },
   {
-    path: "/callback",
+    path: '/callback',
     component: AuthCallback,
-    type: "public",
+    type: 'public',
   },
   {
-    path: "/create-playlist",
+    path: '/create-playlist',
     exact: true,
     component: Home,
-    type: "private",
+    type: 'private',
   },
   {
-    path: "*",
+    path: '*',
     component: PageNotFound,
   },
 ];

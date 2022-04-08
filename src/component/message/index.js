@@ -1,5 +1,4 @@
-import React from "react";
-import "./index.css";
+import './index.css';
 
 const Message = ({ title, description, ...props }) => (
   <div className="message" {...props}>

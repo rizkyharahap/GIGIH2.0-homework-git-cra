@@ -14,22 +14,22 @@
 }
 
 /* data atribute for type of unselected button */
-[data-type="unselected"] {
+[data-type='unselected'] {
   background-color: var(--primary);
   color: var(--white);
 }
 
-[data-type="unselected"]:hover {
+[data-type='unselected']:hover {
   background-color: var(--secondary);
 }
 
 /* data atribute for type of selected button */
-[data-type="selected"] {
+[data-type='selected'] {
   background-color: var(white-700);
   color: var(--black);
 }
 
-[data-type="selected"]:hover {
+[data-type='selected']:hover {
   background-color: var(white-300);
 }
 

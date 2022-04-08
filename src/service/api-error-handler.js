@@ -6,19 +6,19 @@ export const apiErrorHandler = (error) => {
   // Check spesifict error
   switch (error.status) {
     case 400:
-      errorData.message = "Enter search keyword";
+      errorData.message = 'Enter search keyword';
       break;
     case 401:
-      errorData.message = "Unauthorized";
+      errorData.message = 'Unauthorized';
       break;
     case 403:
-      errorData.message = "Forbidden";
+      errorData.message = 'Forbidden';
       break;
     case 429:
-      errorData.message = "The app has exceeded its rate limits";
+      errorData.message = 'The app has exceeded its rate limits';
       break;
     default:
-      errorData.message = "Oops something wrong !";
+      errorData.message = 'Oops something wrong !';
       break;
   }
 

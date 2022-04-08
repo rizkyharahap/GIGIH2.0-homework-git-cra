@@ -1,7 +1,6 @@
-import React from "react";
-import Container from "../container";
-import ButtonAuth from "./btn-auth";
-import "./index.css";
+import Container from '../container';
+import ButtonAuth from './btn-auth';
+import './index.css';
 
 const Navbar = ({ children, authorizeUrl }) => {
   return (

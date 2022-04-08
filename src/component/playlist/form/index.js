@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from "react";
-import "./index.css";
+import { useCallback, useState } from 'react';
+import './index.css';
 
 const FormPlaylist = ({
   defaultValue = {
-    name: "",
-    description: "",
+    name: '',
+    description: '',
   },
   onSubmit,
 }) => {

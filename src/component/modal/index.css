@@ -11,11 +11,11 @@
   background-color: var(--black-700);
 }
 
-.modal[data-type="close"] {
+.modal[data-type='close'] {
   display: none;
 }
 
-.modal[data-type="open"] {
+.modal[data-type='open'] {
   display: flex;
 }
 

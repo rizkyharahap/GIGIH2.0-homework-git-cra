@@ -1,11 +1,5 @@
-export const searchTracksAPI = async ({
-  token,
-  query,
-  type = "track",
-  limit = 12,
-  offset = 0,
-}) => {
-  const url = new URL("https://api.spotify.com/v1/search");
+export const searchTracksAPI = async ({ token, query, type = 'track', limit = 12, offset = 0 }) => {
+  const url = new URL('https://api.spotify.com/v1/search');
 
   const params = {
     q: query,
@@ -19,7 +13,7 @@ export const searchTracksAPI = async ({
   const response = await fetch(url, {
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
 
@@ -27,12 +21,12 @@ export const searchTracksAPI = async ({
 };
 
 export const getCurrentUserProfileAPI = async ({ token }) => {
-  const url = new URL("https://api.spotify.com/v1/me");
+  const url = new URL('https://api.spotify.com/v1/me');
 
   const response = await fetch(url, {
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
 
@@ -49,10 +43,10 @@ export const createPlaylistAPI = async ({ token, user_id, data }) => {
   };
 
   const response = await fetch(url, {
-    method: "POST",
+    method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(body),
   });
@@ -60,20 +54,14 @@ export const createPlaylistAPI = async ({ token, user_id, data }) => {
   return await response.json();
 };
 
-export const addPlaylistItemsAPI = async ({
-  token,
-  playlist_id,
-  uris = [],
-}) => {
-  const url = new URL(
-    `https://api.spotify.com/v1/playlists/${playlist_id}/tracks`
-  );
+export const addPlaylistItemsAPI = async ({ token, playlist_id, uris = [] }) => {
+  const url = new URL(`https://api.spotify.com/v1/playlists/${playlist_id}/tracks`);
 
   const response = await fetch(url, {
-    method: "POST",
+    method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ uris }),
   });

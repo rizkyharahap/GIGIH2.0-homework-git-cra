@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import Container from "../component/container";
-import Navbar from "../component/navbar";
-import Playlist from "../component/playlist";
-import Song from "../component/song";
-import { getCurrentUserProfileAPI, searchTracksAPI } from "../service/api";
-import { apiErrorHandler } from "../service/api-error-handler";
-import { spotifyAuthorizeURL } from "../service/authorize";
-import SearchBar from "../component/searchBar";
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import Container from '../component/container';
+import Navbar from '../component/navbar';
+import Playlist from '../component/playlist';
+import Song from '../component/song';
+import { getCurrentUserProfileAPI, searchTracksAPI } from '../service/api';
+import { apiErrorHandler } from '../service/api-error-handler';
+import { spotifyAuthorizeURL } from '../service/authorize';
+import SearchBar from '../component/searchBar';
 
 const Home = () => {
   const accessToken = useSelector((state) => state.global.accessToken);
@@ -64,11 +64,11 @@ const Home = () => {
       // Assign to state tracks
       setTracks((prev) => ({
         ...prev,
-        data: tracksResponse.tracks?.items || [],
+        data: tracksResponse.tracks.items,
         error: null,
       }));
     } catch (error) {
-      console.error("Error get tracks : ", error);
+      console.error('Error get tracks : ', error);
 
       setTracks((prev) => ({
         ...prev,
@@ -106,7 +106,7 @@ const Home = () => {
         error: null,
       }));
     } catch (error) {
-      console.error("Error get users : ", error);
+      console.error('Error get users : ', error);
 
       setUser((prev) => ({
         ...prev,
@@ -129,20 +129,13 @@ const Home = () => {
   return (
     <>
       <Navbar authorizeUrl={spotifyAuthorizeURL()}>
-        <SearchBar
-          placeholder="Artists, songs, or podcasts"
-          onSearch={getSearchTracks}
-        />
+        <SearchBar placeholder="Artists, songs, or podcasts" onSearch={getSearchTracks} />
       </Navbar>
 
       <Container>
         <Playlist user_id={user.data.id} selectedSong={selectedSong} />
 
-        <Song
-          {...tracks}
-          selectedSong={selectedSong}
-          onSongSelected={handleSelectedSong}
-        />
+        <Song {...tracks} selectedSong={selectedSong} onSongSelected={handleSelectedSong} />
       </Container>
     </>
   );

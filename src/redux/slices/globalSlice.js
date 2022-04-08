@@ -1,18 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  accessToken: "",
+  accessToken: '',
 };
 
 export const globalSlice = createSlice({
-  name: "global",
+  name: 'global',
   initialState,
   reducers: {
     setAccessToken: (state, action) => {
+      // Redux default immer can assing mutable state
       state.accessToken = action.payload;
     },
-    clearAccessToken: (state, action) => {
-      state.accessToken = "";
+    clearAccessToken: (state) => {
+      state.accessToken = '';
     },
   },
 });

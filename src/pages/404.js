@@ -1,6 +1,5 @@
-import React from "react";
-import Container from "../component/container";
-import Message from "../component/message";
+import Container from '../component/container';
+import Message from '../component/message';
 
 const PageNotFound = () => {
   return (
@@ -9,7 +8,7 @@ const PageNotFound = () => {
         title="404"
         description="Page not found !"
         style={{
-          margin: "200px",
+          margin: '200px',
         }}
       />
     </Container>

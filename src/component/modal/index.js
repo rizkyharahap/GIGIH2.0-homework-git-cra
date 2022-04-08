@@ -1,9 +1,8 @@
-import React from "react";
-import "./index.css";
+import './index.css';
 
 const Modal = ({ isOpen, children }) => {
   return (
-    <div className="modal" data-type={isOpen ? "open" : "close"}>
+    <div className="modal" data-type={isOpen ? 'open' : 'close'}>
       <div className="modal-card">{children}</div>
     </div>
   );

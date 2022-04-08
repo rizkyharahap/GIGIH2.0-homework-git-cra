@@ -1,17 +1,10 @@
-import React from "react";
-import Message from "../message";
-import Spinner from "../spinner";
-import "./index.css";
-import Item from "./item";
+import Message from '../message';
+import Spinner from '../spinner';
+import './index.css';
+import Item from './item';
 
 // Song Wrapper component
-const Song = ({
-  data,
-  error,
-  isLoading,
-  selectedSong = [],
-  onSongSelected,
-}) => {
+const Song = ({ data, error, isLoading, selectedSong = [], onSongSelected }) => {
   if (isLoading)
     return (
       <Spinner>
@@ -25,7 +18,7 @@ const Song = ({
         title={error.message}
         description={error.description}
         style={{
-          margin: "200px",
+          margin: '200px',
         }}
       />
     );
@@ -37,7 +30,7 @@ const Song = ({
         description="Please make sure your words are spelled correctly or use less or
     different keywords"
         style={{
-          margin: "200px",
+          margin: '200px',
         }}
       />
     );
@@ -55,10 +48,10 @@ const Song = ({
               className="btn btn-action"
               title="Button"
               rel="noreferrer"
-              data-type={isSelected ? "selected" : "unselected"}
+              data-type={isSelected ? 'selected' : 'unselected'}
               onClick={() => onSongSelected(uri)}
             >
-              {isSelected ? "Deselect" : "Select"}
+              {isSelected ? 'Deselect' : 'Select'}
             </button>
           </Item>
         );

@@ -1,7 +1,6 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { Route } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 const PublicRoute = ({ component: Component, ...rest }) => {
   const { accessToken } = useSelector((state) => state.global);
@@ -13,7 +12,7 @@ const PublicRoute = ({ component: Component, ...rest }) => {
         accessToken ? (
           <Redirect
             to={{
-              pathname: "/create-playlist",
+              pathname: '/create-playlist',
               state: { from: location },
             }}
           />

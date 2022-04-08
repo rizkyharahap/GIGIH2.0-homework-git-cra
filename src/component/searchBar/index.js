@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import "./index.css";
+import { useState } from 'react';
+import './index.css';
 
 const SearchBar = ({ onSearch, placeholder }) => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   const handleInputChange = (event) => {
     setSearch(event.target.value);

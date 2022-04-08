@@ -1,8 +1,7 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { clearAccessToken } from "../../../redux/slices/globalSlice";
-import Avatar from "../../avatar";
-import "./index.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { clearAccessToken } from '../../../redux/slices/globalSlice';
+import Avatar from '../../avatar';
+import './index.css';
 
 const ButtonAuth = ({ authorizeUrl }) => {
   const dispatch = useDispatch();

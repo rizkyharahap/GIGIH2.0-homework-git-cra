@@ -1,8 +1,7 @@
-import React from "react";
-import Container from "../component/container";
-import Message from "../component/message";
-import Navbar from "../component/navbar";
-import { spotifyAuthorizeURL } from "../service/authorize";
+import Container from '../component/container';
+import Message from '../component/message';
+import Navbar from '../component/navbar';
+import { spotifyAuthorizeURL } from '../service/authorize';
 
 const Login = () => {
   return (
@@ -14,7 +13,7 @@ const Login = () => {
           title="Login to Spotipi"
           description="Please click login for using Spotipi features"
           style={{
-            margin: "200px",
+            margin: '200px',
           }}
         />
       </Container>

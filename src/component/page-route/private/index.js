@@ -1,7 +1,6 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { Route } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { accessToken } = useSelector((state) => state.global);
@@ -15,7 +14,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         ) : (
           <Redirect
             to={{
-              pathname: "/",
+              pathname: '/',
               state: { from: location },
             }}
           />

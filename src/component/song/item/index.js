@@ -1,7 +1,6 @@
-import React from "react";
-import Album from "../album";
-import Description from "../description";
-import "./index.css";
+import Album from '../album';
+import Description from '../description';
+import './index.css';
 
 // Song Item component
 const Item = ({ album, artist, track, style, children }) => {

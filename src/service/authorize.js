@@ -3,10 +3,10 @@ const scope = process.env.REACT_APP_SPOTIFY_SCOPE;
 const redirectURI = process.env.REACT_APP_SPOTIFY_REDIRECT_URI;
 
 export const spotifyAuthorizeURL = () => {
-  const url = new URL("https://accounts.spotify.com/authorize");
+  const url = new URL('https://accounts.spotify.com/authorize');
 
   const params = {
-    response_type: "token",
+    response_type: 'token',
     client_id: clientId,
     scope,
     redirect_uri: redirectURI,
