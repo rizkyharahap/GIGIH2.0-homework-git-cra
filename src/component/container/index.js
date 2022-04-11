@@ -1,7 +1,7 @@
-import './index.css';
+import styles from './container.module.scss';
 
 const Container = (props) => {
-  return <div className="container" {...props} />;
+  return <div className={styles.container} {...props} />;
 };
 
 export default Container;

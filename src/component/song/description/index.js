@@ -1,4 +1,4 @@
-import './index.css';
+import styles from './description.module.scss';
 
 /**
  * For Song Description component
@@ -9,7 +9,7 @@ import './index.css';
  */
 const Description = ({ title, artist, year, duration, style }) => {
   return (
-    <div className="song-description" style={style}>
+    <div className={styles.song__description} style={style}>
       <h2>{title}</h2>
       <p>
         <b>{artist}</b> &bull; {year} &bull; {duration}

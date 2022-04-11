@@ -1,4 +1,4 @@
-.btn-auth {
+@mixin btn-auth {
   display: flex;
   align-items: center;
   width: auto;
@@ -10,34 +10,36 @@
   transition: all 33ms cubic-bezier(0.3, 0, 0, 1);
   white-space: nowrap;
   will-change: transform;
+
+  /* for tablet min-width : 576px */
+  @media all and (min-width: 576px) {
+    font-size: 1rem;
+    height: 38px;
+  }
 }
 
-.btn-auth-login {
+.btn__login {
+  @include btn-auth;
+
   justify-content: center;
   background-color: var(--white);
   color: var(--black);
+
+  &:hover {
+    transform: scale(1.06);
+  }
 }
 
-.btn-auth-login:hover {
-  transform: scale(1.06);
-}
+.btn__logout {
+  @include btn-auth;
 
-.btn-auth-logout {
   justify-content: space-between;
   column-gap: 8px;
   padding: 2px 16px 2px 2px;
   background-color: var(--black);
   color: var(--white);
-}
 
-.btn-auth-logout:hover {
-  background-color: var(--grey);
-}
-
-/* for tablet min-width : 576px */
-@media all and (min-width: 576px) {
-  .btn-auth {
-    font-size: 1rem;
-    height: 38px;
+  &:hover {
+    background-color: var(--grey);
   }
 }

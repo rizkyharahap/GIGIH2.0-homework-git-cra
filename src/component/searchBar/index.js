@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './index.css';
+import styles from './search-bar.module.scss';
 
 const SearchBar = ({ onSearch, placeholder }) => {
   const [search, setSearch] = useState('');
@@ -15,15 +15,15 @@ const SearchBar = ({ onSearch, placeholder }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="search">
+      <div className={styles.search}>
         <input
-          className="search-input"
+          className={styles.search__input}
           type="search"
           placeholder={placeholder}
           defaultValue={search}
           onChange={handleInputChange}
         />
-        <button className="btn btn-search" type="submit">
+        <button className={`btn ${styles.btn__search}`} type="submit">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"

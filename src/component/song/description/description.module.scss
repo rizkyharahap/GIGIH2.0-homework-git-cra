@@ -1,0 +1,19 @@
+.song__description {
+  margin-top: 12px;
+
+  h2 {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    text-transform: none;
+    letter-spacing: normal;
+    margin-bottom: 4px;
+  }
+
+  p {
+    color: var(--white-700);
+    font-size: 0.875rem;
+    line-height: 1rem;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+}

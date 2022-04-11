@@ -1,11 +1,11 @@
 import Album from '../album';
 import Description from '../description';
-import './index.css';
+import styles from './item.module.scss';
 
 // Song Item component
 const Item = ({ album, artist, track, style, children }) => {
   return (
-    <div className="song-item" style={style}>
+    <div className={styles.song__item} style={style}>
       {/* Album cover  */}
       <Album images={album.images} title={album.name} />
 

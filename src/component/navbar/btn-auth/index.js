@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { clearAccessToken } from '../../../redux/slices/globalSlice';
 import Avatar from '../../avatar';
-import './index.css';
+import styles from './btn-auth.module.scss';
 
 const ButtonAuth = ({ authorizeUrl }) => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const ButtonAuth = ({ authorizeUrl }) => {
 
   if (accessToken)
     return (
-      <button className="btn btn-auth btn-auth-logout" onClick={handleLogout}>
+      <button className={`btn ${styles.btn__logout}`} onClick={handleLogout}>
         <Avatar />
         Log out
       </button>
@@ -24,7 +24,7 @@ const ButtonAuth = ({ authorizeUrl }) => {
   return (
     <a
       href={authorizeUrl}
-      className="btn btn-auth btn-auth-login"
+      className={`btn ${styles.btn__login}`}
       title="Login with Spotify"
       rel="noreferrer"
     >

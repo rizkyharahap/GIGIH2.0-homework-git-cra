@@ -1,6 +1,6 @@
 import Message from '../message';
 import Spinner from '../spinner';
-import './index.css';
+import styles from './song.module.scss';
 import Item from './item';
 
 // Song Wrapper component
@@ -36,7 +36,7 @@ const Song = ({ data, error, isLoading, selectedSong = [], onSongSelected }) => 
     );
 
   return (
-    <div className="song">
+    <div className={styles.song}>
       {/* Mapping all tracks */}
 
       {data.map(({ uri, album, artists, ...track }) => {
@@ -45,7 +45,7 @@ const Song = ({ data, error, isLoading, selectedSong = [], onSongSelected }) => 
         return (
           <Item key={uri} album={album} artist={artists[0]} track={track}>
             <button
-              className="btn btn-action"
+              className={`btn ${styles.btn__action}`}
               title="Button"
               rel="noreferrer"
               data-type={isSelected ? 'selected' : 'unselected'}

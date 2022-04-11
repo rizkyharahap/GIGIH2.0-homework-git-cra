@@ -1,19 +1,19 @@
-import './index.css';
+import styles from './modal.module.scss';
 
 const Modal = ({ isOpen, children }) => {
   return (
-    <div className="modal" data-type={isOpen ? 'open' : 'close'}>
-      <div className="modal-card">{children}</div>
+    <div className={styles.modal} data-type={isOpen ? 'open' : 'close'}>
+      <div className={styles.modal__card}>{children}</div>
     </div>
   );
 };
 
 Modal.Header = ({ title, onClose }) => {
   return (
-    <header className="modal-header">
+    <header className={styles.modal__header}>
       <h1>{title}</h1>
 
-      <button className="btn btn-close" onClick={onClose}>
+      <button className={`btn ${styles.btn__close}`} onClick={onClose}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="24px"
@@ -29,7 +29,7 @@ Modal.Header = ({ title, onClose }) => {
 };
 
 Modal.Content = ({ children }) => {
-  return <div className="modal-content">{children}</div>;
+  return <div className={styles.modal__content}>{children}</div>;
 };
 
 export default Modal;

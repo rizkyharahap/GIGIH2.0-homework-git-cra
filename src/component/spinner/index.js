@@ -1,9 +1,9 @@
-import './index.css';
+import styles from './spinner.module.scss';
 
 const Spinner = ({ children }) => {
   return (
-    <div className="spinner">
-      <div className="spinner-icon"></div>
+    <div className={styles.spinner}>
+      <div className={styles.spinner__icon}></div>
       {children}
     </div>
   );

@@ -1,0 +1,13 @@
+.form__playlist {
+  display: flex;
+  flex-direction: column;
+
+  .btn__playlist__save {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.76px;
+    line-height: 18px;
+    padding: 8px 34px;
+    margin-left: auto;
+  }
+}

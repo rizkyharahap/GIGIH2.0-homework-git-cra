@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import './index.css';
+import styles from './form.module.scss';
 
 const FormPlaylist = ({
   defaultValue = {
@@ -27,7 +27,7 @@ const FormPlaylist = ({
   };
 
   return (
-    <form className="form-playlist" onSubmit={handleSubmit}>
+    <form className={styles.form__playlist} onSubmit={handleSubmit}>
       <div className="form-control">
         <label htmlFor="fName">Name</label>
         <input
@@ -57,7 +57,7 @@ const FormPlaylist = ({
         ></textarea>
       </div>
 
-      <button className="btn btn-playlist-save" type="submit">
+      <button className={`btn ${styles.btn__playlist__save}`} type="submit">
         SAVE
       </button>
     </form>

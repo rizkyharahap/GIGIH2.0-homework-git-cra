@@ -1,8 +1,8 @@
-import './index.css';
+import styles from './avatar.module.scss';
 
 const Avatar = () => {
   return (
-    <div className="avatar">
+    <div className={styles.avatar}>
       <svg
         width="16"
         height="16"

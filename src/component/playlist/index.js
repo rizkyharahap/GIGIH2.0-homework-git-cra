@@ -6,7 +6,7 @@ import Message from '../message';
 import Modal from '../modal';
 import Spinner from '../spinner';
 import FormPlaylist from './form';
-import './index.css';
+import styles from './playlist.module.scss';
 
 const Playlist = ({ user_id, selectedSong = [] }) => {
   const accessToken = useSelector((state) => state.global.accessToken);
@@ -82,9 +82,9 @@ const Playlist = ({ user_id, selectedSong = [] }) => {
   };
 
   return (
-    <div className="playlist">
-      <button className="btn btn-playlist-create" onClick={handleToogleModal}>
-        <div className="btn-playlist-create-icon">
+    <div className={styles.playlist}>
+      <button className={`btn ${styles.btn__playlist}`} onClick={handleToogleModal}>
+        <div className={styles.btn__playlist__icon}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"

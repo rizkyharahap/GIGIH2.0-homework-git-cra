@@ -1,12 +1,12 @@
 import Container from '../container';
 import ButtonAuth from './btn-auth';
-import './index.css';
+import styles from './navbar.module.scss';
 
 const Navbar = ({ children, authorizeUrl }) => {
   return (
-    <header className="navbar-wrapper">
+    <header className={styles.navbar}>
       <Container>
-        <nav className="navbar">
+        <nav>
           <div>{children}</div>
           <ButtonAuth authorizeUrl={authorizeUrl} />
         </nav>
