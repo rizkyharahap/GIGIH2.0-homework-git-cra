@@ -1,7 +1,9 @@
 .song__item {
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: stretch;
   background-color: var(--black);
   border: 1px solid var(--white-100);
   padding: 16px;

@@ -1,144 +1,46 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import Container from '../component/container';
-import Navbar from '../component/navbar';
-import Playlist from '../component/playlist';
+import { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import Song from '../component/song';
-import { getCurrentUserProfileAPI, searchTracksAPI } from '../service/api';
-import { apiErrorHandler } from '../service/api-error-handler';
-import { spotifyAuthorizeURL } from '../service/authorize';
-import SearchBar from '../component/searchBar';
+import { useSearchTrackQuery } from '../redux/api/songApi';
+import { addSelectedTrack, removeSelectedTrack } from '../redux/slices/trackSlice';
 
 const Home = () => {
-  const accessToken = useSelector((state) => state.global.accessToken);
+  const dispatch = useDispatch();
+  const location = useLocation();
 
-  const [tracks, setTracks] = useState({
-    data: [],
-    isLoading: false,
-    error: null,
-  });
+  // Get query search
+  const params = new URLSearchParams(location.search);
+  const searchQuery = params.get('q');
 
-  const [user, setUser] = useState({
-    data: {},
-    isLoading: false,
-    error: null,
-  });
+  const tracks = useSearchTrackQuery(
+    { query: searchQuery },
+    {
+      skip: !searchQuery,
+    },
+  );
 
-  const [selectedSong, setSelectedSong] = useState([]);
+  const { selectedTracks } = useSelector((state) => state.track);
 
   // Handle for select or deselect song
-  const handleSelectedSong = (value) => {
-    // Check for selected song
-    const indexSelectedSong = selectedSong.indexOf(value);
+  const handleSelectedSong = useCallback(
+    (value) => {
+      // Check for selected song
+      const indexSelectedSong = selectedTracks.indexOf(value);
 
-    const newSelectedSong = [...selectedSong];
-
-    // When song not selected
-    if (indexSelectedSong < 0) {
-      // append to new selected song
-      newSelectedSong.push(value);
-    } else {
-      // remove from selected song with index of selected song
-      newSelectedSong.splice(indexSelectedSong, 1);
-    }
-
-    setSelectedSong(newSelectedSong);
-  };
-
-  const getSearchTracks = async (query) => {
-    // Show Loading
-    setTracks((prev) => ({
-      ...prev,
-      isLoading: true,
-    }));
-
-    try {
-      const tracksResponse = await searchTracksAPI({
-        token: accessToken,
-        query,
-      });
-
-      // Throw error if have error
-      if (tracksResponse.error) throw tracksResponse.error;
-
-      // Assign to state tracks
-      setTracks((prev) => ({
-        ...prev,
-        data: tracksResponse.tracks.items,
-        error: null,
-      }));
-    } catch (error) {
-      console.error('Error get tracks : ', error);
-
-      setTracks((prev) => ({
-        ...prev,
-        error: apiErrorHandler(error),
-      }));
-    } finally {
-      // Hide loading
-      setTracks((prev) => ({
-        ...prev,
-        isLoading: false,
-      }));
-    }
-  };
-
-  const getCurrentUserProfile = async (token) => {
-    // Show Loading
-    setUser((prev) => ({
-      ...prev,
-      isLoading: true,
-    }));
-
-    try {
-      const userResponse = await getCurrentUserProfileAPI({
-        token,
-      });
-
-      // Throw error if have error
-      if (userResponse.error) throw userResponse.error;
-      if (!userResponse.id) throw userResponse.error;
-
-      // Assign to state users
-      setUser((prev) => ({
-        ...prev,
-        data: userResponse,
-        error: null,
-      }));
-    } catch (error) {
-      console.error('Error get users : ', error);
-
-      setUser((prev) => ({
-        ...prev,
-        error: apiErrorHandler(error),
-      }));
-    } finally {
-      // Hide loading
-      setUser((prev) => ({
-        ...prev,
-        isLoading: false,
-      }));
-    }
-  };
-
-  useEffect(() => {
-    // Load user when access token is available
-    if (accessToken) getCurrentUserProfile(accessToken);
-  }, [accessToken]);
-
-  return (
-    <>
-      <Navbar authorizeUrl={spotifyAuthorizeURL()}>
-        <SearchBar placeholder="Artists, songs, or podcasts" onSearch={getSearchTracks} />
-      </Navbar>
-
-      <Container>
-        <Playlist user_id={user.data.id} selectedSong={selectedSong} />
-
-        <Song {...tracks} selectedSong={selectedSong} onSongSelected={handleSelectedSong} />
-      </Container>
-    </>
+      // When song not selected
+      if (indexSelectedSong < 0) {
+        // append to new selected song
+        dispatch(addSelectedTrack(value));
+      } else {
+        // remove from selected song with index of selected song
+        dispatch(removeSelectedTrack(indexSelectedSong));
+      }
+    },
+    [dispatch, selectedTracks],
   );
+
+  return <Song {...tracks} selectedSong={selectedTracks} onSongSelected={handleSelectedSong} />;
 };
 
 export default Home;

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   accessToken: '',
+  isNavbarOpen: false,
 };
 
 export const globalSlice = createSlice({
@@ -15,9 +16,10 @@ export const globalSlice = createSlice({
     clearAccessToken: (state) => {
       state.accessToken = '';
     },
+    setNavbarOpen: (state, action) => {
+      state.isNavbarOpen = action.payload;
+    },
   },
 });
 
-export const { setAccessToken, clearAccessToken } = globalSlice.actions;
-
-export default globalSlice;
+export const { setAccessToken, clearAccessToken, setNavbarOpen } = globalSlice.actions;

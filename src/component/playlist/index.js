@@ -8,7 +8,7 @@ import Spinner from '../spinner';
 import FormPlaylist from './form';
 import styles from './playlist.module.scss';
 
-const Playlist = ({ user_id, selectedSong = [] }) => {
+const Playlist = ({ user_id, selectedTracks = [] }) => {
   const accessToken = useSelector((state) => state.global.accessToken);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -50,7 +50,7 @@ const Playlist = ({ user_id, selectedSong = [] }) => {
       const addItemPLaylist = await addPlaylistItemsAPI({
         token: accessToken,
         playlist_id: playlistId,
-        uris: selectedSong,
+        uris: selectedTracks,
       });
 
       if (addItemPLaylist.error) throw addItemPLaylist.error;
@@ -82,7 +82,7 @@ const Playlist = ({ user_id, selectedSong = [] }) => {
   };
 
   return (
-    <div className={styles.playlist}>
+    <>
       <button className={`btn ${styles.btn__playlist}`} onClick={handleToogleModal}>
         <div className={styles.btn__playlist__icon}>
           <svg
@@ -105,14 +105,14 @@ const Playlist = ({ user_id, selectedSong = [] }) => {
         {playlist.isLoading && <Spinner />}
         <Modal.Header title="Create Playlist" onClose={handleToogleModal} />
         <Modal.Content>
-          {!Array.isArray(selectedSong) || selectedSong.length === 0 ? (
+          {!Array.isArray(selectedTracks) || selectedTracks.length === 0 ? (
             <Message title="Not song selected" description="Please select at least one song !" />
           ) : (
             <FormPlaylist onSubmit={createPlaylist} />
           )}
         </Modal.Content>
       </Modal>
-    </div>
+    </>
   );
 };
 

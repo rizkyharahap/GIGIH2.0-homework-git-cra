@@ -1,9 +1,16 @@
 .avatar {
-  height: 32px;
-  width: 32px;
+  height: 26px;
+  min-width: 26px;
+  width: 26px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--grey-100);
   border-radius: 50%;
+
+  /* for tablet min-width : 576px */
+  @media all and (min-width: 576px) {
+    min-width: 28px;
+    height: 28px;
+  }
 }

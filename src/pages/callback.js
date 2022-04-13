@@ -1,7 +1,7 @@
+import { Box } from '@mantine/core';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import Container from '../component/container';
 import Spinner from '../component/spinner';
 import { setAccessToken } from '../redux/slices/globalSlice';
 
@@ -19,9 +19,9 @@ const AuthCallback = () => {
   }, [dispatch, token]);
 
   return (
-    <Container>
+    <Box>
       <Spinner />
-    </Container>
+    </Box>
   );
 };
 

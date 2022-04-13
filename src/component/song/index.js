@@ -1,7 +1,7 @@
 import Message from '../message';
 import Spinner from '../spinner';
-import styles from './song.module.scss';
 import Item from './item';
+import { Button, Grid } from '@mantine/core';
 
 // Song Wrapper component
 const Song = ({ data, error, isLoading, selectedSong = [], onSongSelected }) => {
@@ -23,7 +23,7 @@ const Song = ({ data, error, isLoading, selectedSong = [], onSongSelected }) => 
       />
     );
 
-  if (!data || data.length === 0)
+  if (!data || data.items?.length === 0)
     return (
       <Message
         title="No Results found"
@@ -36,27 +36,30 @@ const Song = ({ data, error, isLoading, selectedSong = [], onSongSelected }) => 
     );
 
   return (
-    <div className={styles.song}>
+    <Grid columns={12}>
       {/* Mapping all tracks */}
 
-      {data.map(({ uri, album, artists, ...track }) => {
+      {data.items?.map(({ uri, album, artists, ...track }) => {
         const isSelected = selectedSong.includes(uri);
 
         return (
-          <Item key={uri} album={album} artist={artists[0]} track={track}>
-            <button
-              className={`btn ${styles.btn__action}`}
-              title="Button"
-              rel="noreferrer"
-              data-type={isSelected ? 'selected' : 'unselected'}
-              onClick={() => onSongSelected(uri)}
-            >
-              {isSelected ? 'Deselect' : 'Select'}
-            </button>
-          </Item>
+          <Grid.Col key={uri} span={6} xs={4} md={3} lg={2.25}>
+            <Item album={album} artist={artists[0]} track={track}>
+              <Button
+                color={isSelected ? 'gray' : 'green'}
+                radius="xl"
+                size="md"
+                uppercase
+                title="Select or deselect song"
+                onClick={() => onSongSelected(uri)}
+              >
+                {isSelected ? 'Deselect' : 'Select'}
+              </Button>
+            </Item>
+          </Grid.Col>
         );
       })}
-    </div>
+    </Grid>
   );
 };
 

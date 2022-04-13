@@ -1,42 +1,36 @@
-import { useState } from 'react';
-import styles from './search-bar.module.scss';
+import { Input } from '@mantine/core';
+import SearchIcon from 'tabler-icons-react/dist/icons/search';
 
-const SearchBar = ({ onSearch, placeholder }) => {
-  const [search, setSearch] = useState('');
-
-  const handleInputChange = (event) => {
-    setSearch(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSearch(search);
-  };
-
+const SearchBar = (props) => {
   return (
-    <form onSubmit={handleSubmit}>
-      <div className={styles.search}>
-        <input
-          className={styles.search__input}
-          type="search"
-          placeholder={placeholder}
-          defaultValue={search}
-          onChange={handleInputChange}
-        />
-        <button className={`btn ${styles.btn__search}`} type="submit">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24px"
-            viewBox="0 0 24 24"
-            width="24px"
-            fill="#000000"
-          >
-            <path d="M0 0h24v24H0V0z" fill="none" />
-            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
-          </svg>
-        </button>
-      </div>
-    </form>
+    <Input
+      icon={<SearchIcon />}
+      radius="xl"
+      size="md"
+      type="search"
+      styles={(theme) => ({
+        wrapper: {
+          maxWidth: 300,
+          width: '100%',
+        },
+        input: {
+          backgroundColor: theme.colors.gray[0],
+          '&:hover': {
+            backgroundColor: theme.colors.gray[1],
+          },
+          color: theme.colors.dark,
+          fontSize: '0.8725rem',
+          lineHeight: '1rem',
+          textOverflow: 'ellipsis',
+          textTransform: 'none',
+          letterSpacing: 'normal',
+        },
+        icon: {
+          color: theme.colors.dark,
+        },
+      })}
+      {...props}
+    />
   );
 };
 
