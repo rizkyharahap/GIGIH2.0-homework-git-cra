@@ -14,14 +14,14 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { songApi } from './api/songApi';
+import { trackApi } from './api/trackApi';
 import { trackSlice } from './slices/trackSlice';
 
 const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  blacklist: [trackSlice.name, userApi.reducerPath, songApi.reducerPath],
+  blacklist: [trackSlice.name, userApi.reducerPath, trackApi.reducerPath],
 };
 
 const persistedReducer = persistReducer(
@@ -30,7 +30,7 @@ const persistedReducer = persistReducer(
     [globalSlice.name]: globalSlice.reducer,
     [trackSlice.name]: trackSlice.reducer,
     [userApi.reducerPath]: userApi.reducer,
-    [songApi.reducerPath]: songApi.reducer,
+    [trackApi.reducerPath]: trackApi.reducer,
   }),
 );
 
@@ -41,7 +41,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(userApi.middleware, songApi.middleware),
+    }).concat(userApi.middleware, trackApi.middleware),
   devTools: process.env.NODE_ENV === 'development',
 });
 

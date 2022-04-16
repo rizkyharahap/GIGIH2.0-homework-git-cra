@@ -11,6 +11,7 @@ module.exports = {
     'plugin:jsx-a11y/strict',
     'plugin:react/jsx-runtime',
   ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -18,7 +19,7 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: 'module',
   },
-  plugins: ['react', 'jsx-a11y'],
+  plugins: ['react', 'jsx-a11y', '@typescript-eslint'],
   rules: {
     'react-hooks/exhaustive-deps': 'error',
     'no-var': 'error',
@@ -38,7 +39,14 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['**/*.test.js', '**/*.test.jsx', '**/*.spec.js', '**/*.spec.jsx'],
+      files: [
+        '**/*.test.js',
+        '**/*.test.jsx',
+        '**/*.test.tsx',
+        '**/*.spec.js',
+        '**/*.spec.jsx',
+        '**/*.spec.tsx',
+      ],
       env: {
         jest: true,
       },

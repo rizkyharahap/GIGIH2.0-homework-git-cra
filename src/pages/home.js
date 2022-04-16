@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import Song from '../component/song';
-import { useSearchTrackQuery } from '../redux/api/songApi';
+import TrackList from '../component/tracks';
+import { useSearchTrackQuery } from '../redux/api/trackApi';
 import { addSelectedTrack, removeSelectedTrack } from '../redux/slices/trackSlice';
 
 const Home = () => {
@@ -40,7 +40,9 @@ const Home = () => {
     [dispatch, selectedTracks],
   );
 
-  return <Song {...tracks} selectedSong={selectedTracks} onSongSelected={handleSelectedSong} />;
+  return (
+    <TrackList {...tracks} selectedSong={selectedTracks} onSongSelected={handleSelectedSong} />
+  );
 };
 
 export default Home;
