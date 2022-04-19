@@ -33,17 +33,14 @@ const Header = () => {
     setSearch(event.target.value);
   };
 
-  // Delay input for 300ms
-  const [debouncedSearch] = useDebouncedValue(search, 300);
-
   useEffect(() => {
-    if (debouncedSearch) {
+    if (search) {
       push({
         pathname: location.pathname,
-        search: `?q=${debouncedSearch}`,
+        search: `?q=${search}`,
       });
     }
-  }, [debouncedSearch, location.pathname, push]);
+  }, [search, location.pathname, push]);
 
   return (
     <BaseHeader height={70}>

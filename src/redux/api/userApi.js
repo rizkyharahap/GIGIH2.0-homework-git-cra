@@ -12,7 +12,7 @@ export const userApi = createApi({
 
   endpoints: (builder) => ({
     getCurrentUserProfile: builder.query({
-      query: () => 'me',
+      query: () => '/me',
     }),
   }),
 });

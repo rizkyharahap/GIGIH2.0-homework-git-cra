@@ -11,8 +11,9 @@ export interface TrackListProps {
     message: string;
     description: string;
   };
-  isLoading: boolean;
+  isLoading?: boolean;
   selectedSong: string[];
+  // eslint-disable-next-line no-unused-vars
   onSongSelected: (value: string) => void;
 }
 
@@ -20,7 +21,7 @@ export interface TrackListProps {
 const TrackList: FC<TrackListProps> = ({
   data,
   error,
-  isLoading,
+  isLoading = false,
   selectedSong = [],
   onSongSelected,
 }) => {
@@ -58,14 +59,23 @@ const TrackList: FC<TrackListProps> = ({
     <Grid columns={12}>
       {/* Mapping all tracks */}
 
-      {data.items?.map((track) => {
-        const { uri } = track;
-
+      {data.items?.map(({ album, artists, uri, name, duration_ms }) => {
         const isSelected = selectedSong.includes(uri);
 
         return (
           <Grid.Col key={uri} span={6} xs={4} md={3} lg={2.25}>
-            <Item track={track}>
+            <Item
+              album={{
+                images: album.images,
+                title: album.name,
+              }}
+              description={{
+                title: name,
+                artist: artists.map(({ name }) => name).join(', '),
+                year: new Date(album.release_date).getFullYear(),
+                duration: new Date(duration_ms).toISOString().substr(14, 5),
+              }}
+            >
               <Button
                 color={isSelected ? 'gray' : 'green'}
                 radius="xl"

@@ -5,9 +5,13 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import './index.css';
-import { persistor, store } from './redux/store';
+import { setupStore } from './redux/store';
 import reportWebVitals from './reportWebVitals';
 import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
+
+const store = setupStore();
+const persistor = persistStore(setupStore());
 
 ReactDOM.render(
   <React.StrictMode>

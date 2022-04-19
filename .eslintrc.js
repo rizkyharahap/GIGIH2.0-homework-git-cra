@@ -3,6 +3,7 @@ module.exports = {
     browser: true,
     es6: true,
     node: true,
+    jest: true,
   },
   extends: [
     'eslint:recommended',
@@ -19,7 +20,7 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: 'module',
   },
-  plugins: ['react', 'jsx-a11y', '@typescript-eslint'],
+  plugins: ['react', 'jsx-a11y', '@typescript-eslint', 'jest'],
   rules: {
     'react-hooks/exhaustive-deps': 'error',
     'no-var': 'error',
@@ -31,6 +32,7 @@ module.exports = {
     'react/prop-types': 'off',
     'react/display-name': 'off',
     'no-unused-vars': 'warn',
+    'jest/no-undef': 'off',
   },
   settings: {
     react: {
@@ -46,10 +48,8 @@ module.exports = {
         '**/*.spec.js',
         '**/*.spec.jsx',
         '**/*.spec.tsx',
+        '**/setupTest.js',
       ],
-      env: {
-        jest: true,
-      },
     },
   ],
 };

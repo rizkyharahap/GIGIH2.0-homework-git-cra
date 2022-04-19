@@ -18,10 +18,12 @@ export const trackApi = createApi({
 
   refetchOnReconnect: true,
 
+  keepUnusedDataFor: process.env.NODE_ENV === 'test' ? 0 : 60,
+
   endpoints: (builder) => ({
     searchTrack: builder.query<Tracks, SearchProps>({
       query: ({ query, type = 'track', limit = 12, offset = 0 }) => ({
-        url: 'search',
+        url: '/search',
         params: {
           q: query,
           type,

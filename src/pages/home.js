@@ -1,9 +1,11 @@
+import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import TrackList from '../component/tracks';
 import { useSearchTrackQuery } from '../redux/api/trackApi';
 import { addSelectedTrack, removeSelectedTrack } from '../redux/slices/trackSlice';
+import { apiErrorHandler } from '../service/api-error-handler';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -13,11 +15,8 @@ const Home = () => {
   const params = new URLSearchParams(location.search);
   const searchQuery = params.get('q');
 
-  const tracks = useSearchTrackQuery(
-    { query: searchQuery },
-    {
-      skip: !searchQuery,
-    },
+  const { data, isLoading, error } = useSearchTrackQuery(
+    searchQuery ? { query: searchQuery } : skipToken,
   );
 
   const { selectedTracks } = useSelector((state) => state.track);
@@ -41,7 +40,13 @@ const Home = () => {
   );
 
   return (
-    <TrackList {...tracks} selectedSong={selectedTracks} onSongSelected={handleSelectedSong} />
+    <TrackList
+      data={data}
+      error={error && apiErrorHandler(error)}
+      isLoading={isLoading}
+      selectedSong={selectedTracks}
+      onSongSelected={handleSelectedSong}
+    />
   );
 };
 
