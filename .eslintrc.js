@@ -48,8 +48,10 @@ module.exports = {
         '**/*.spec.js',
         '**/*.spec.jsx',
         '**/*.spec.tsx',
-        '**/setupTest.js',
       ],
+      env: {
+        jest: true,
+      },
     },
   ],
 };
