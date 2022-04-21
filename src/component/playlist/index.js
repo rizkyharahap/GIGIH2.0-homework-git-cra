@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Check, X } from 'tabler-icons-react';
 import { addPlaylistItemsAPI, createPlaylistAPI } from '../../service/api';
 import { apiErrorHandler } from '../../service/api-error-handler';
 import Message from '../message';
@@ -7,6 +8,7 @@ import Modal from '../modal';
 import Spinner from '../spinner';
 import FormPlaylist from './form';
 import styles from './playlist.module.scss';
+import { showNotification } from '@mantine/notifications';
 
 const Playlist = ({ user_id, selectedTracks = [] }) => {
   const accessToken = useSelector((state) => state.global.accessToken);
@@ -64,6 +66,13 @@ const Playlist = ({ user_id, selectedTracks = [] }) => {
         error: null,
       }));
 
+      showNotification({
+        title: 'Create Playlist Success',
+        message: 'Please check playlist on your own Spotify',
+        icon: <Check />,
+        color: 'green',
+      });
+
       setIsModalOpen(false);
     } catch (error) {
       console.error('Error get users : ', error);
@@ -72,6 +81,13 @@ const Playlist = ({ user_id, selectedTracks = [] }) => {
         ...prev,
         error: apiErrorHandler(error),
       }));
+
+      showNotification({
+        title: 'Failed create playlist',
+        message: error.message,
+        icon: <X />,
+        color: 'red',
+      });
     } finally {
       // Hide loading
       setPlaylist((prev) => ({

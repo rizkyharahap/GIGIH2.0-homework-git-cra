@@ -9,6 +9,7 @@ import { setupStore } from './redux/store';
 import reportWebVitals from './reportWebVitals';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
+import { NotificationsProvider } from '@mantine/notifications';
 
 const store = setupStore();
 const persistor = persistStore(setupStore());
@@ -19,7 +20,9 @@ ReactDOM.render(
       <PersistGate loading={null} persistor={persistor}>
         <Router>
           <MantineProvider theme={{ colorScheme: 'dark' }}>
-            <App />
+            <NotificationsProvider>
+              <App />
+            </NotificationsProvider>
           </MantineProvider>
         </Router>
       </PersistGate>
